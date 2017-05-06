@@ -80,6 +80,11 @@ public class Cirkelgui extends javax.swing.JFrame {
         jLabel5.setText("Straal/zijde");
 
         kleurComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        kleurComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kleurComboBoxActionPerformed(evt);
+            }
+        });
 
         knopCirkel.setText("TEKEN Cirkel");
         knopCirkel.addActionListener(new java.awt.event.ActionListener() {
@@ -155,10 +160,9 @@ public class Cirkelgui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(XcoordTextField)
-                                .addComponent(AfstandLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(YcoordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+                            .addComponent(XcoordTextField)
+                            .addComponent(AfstandLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(YcoordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -282,6 +286,10 @@ public class Cirkelgui extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_knopVierkantActionPerformed
+
+    private void kleurComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kleurComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kleurComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
