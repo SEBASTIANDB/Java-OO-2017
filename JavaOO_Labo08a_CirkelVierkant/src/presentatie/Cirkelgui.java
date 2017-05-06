@@ -19,6 +19,7 @@ import logica.*;
 public class Cirkelgui extends javax.swing.JFrame {
 
     private Figuur f;//f = new Vierkant();
+    private Figuur f2;
     private Cirkel c;//moet niet meer gebruikt worden
 
     /**
@@ -36,6 +37,7 @@ public class Cirkelgui extends javax.swing.JFrame {
     private double straal;
     private Kleur kleur;
     private Kleur kleurRand;
+    private boolean geplaatst;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -211,35 +213,74 @@ public class Cirkelgui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void knopCirkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knopCirkelActionPerformed
-        try {
-            kleur = (Kleur) kleurComboBox.getSelectedItem();
-            kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
-            this.f = new Cirkel(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
-            ((Cirkelpanel) cPanel).repaint();
+        if (f != null) {
+            try {
+                kleur = (Kleur) kleurComboBox.getSelectedItem();
+                kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
+                this.f2 = new Cirkel(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
+                ((Cirkelpanel) cPanel).repaint();
 
-        } catch (IllegalArgumentException d) {
-            ErrorLabel.setText(d + "");
+            } catch (IllegalArgumentException d) {
+                ErrorLabel.setText(d + "");
 
-        } catch (Exception e) {
-            ErrorLabel.setText(e + "");
+            } catch (Exception e) {
+                ErrorLabel.setText(e + "");
+
+            }
+
+        } else {
+            try {
+                kleur = (Kleur) kleurComboBox.getSelectedItem();
+                kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
+                this.f = new Cirkel(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
+                ((Cirkelpanel) cPanel).repaint();
+                geplaatst = true;
+
+            } catch (IllegalArgumentException d) {
+                ErrorLabel.setText(d + "");
+
+            } catch (Exception e) {
+                ErrorLabel.setText(e + "");
+
+            }
 
         }
+
     }//GEN-LAST:event_knopCirkelActionPerformed
 
     private void knopVierkantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knopVierkantActionPerformed
-        try {
-            kleur = (Kleur) kleurComboBox.getSelectedItem();
-            kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
-            this.f = new Vierkant(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
-            ((Cirkelpanel) cPanel).repaint();
+        if (f != null) {
+            try {
+                kleur = (Kleur) kleurComboBox.getSelectedItem();
+                kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
+                this.f2 = new Vierkant(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
+                ((Cirkelpanel) cPanel).repaint();
 
-        } catch (IllegalArgumentException d) {//zijde ipv straal
-            ErrorLabel.setText(d + "");
+            } catch (IllegalArgumentException d) {//zijde ipv straal
+                ErrorLabel.setText(d + "");
 
-        } catch (Exception e) {
-            ErrorLabel.setText(e + "");
+            } catch (Exception e) {
+                ErrorLabel.setText(e + "");
+
+            }
+        } else {
+            try {
+                kleur = (Kleur) kleurComboBox.getSelectedItem();
+                kleurRand = (Kleur) kleurRandComboBox.getSelectedItem();
+                this.f = new Vierkant(kleur, kleurRand, Integer.parseInt(jTextField1.getText()), new Punt(cPanel.getWidth() / 2, cPanel.getHeight() / 2), Integer.parseInt(straalTextField.getText()));
+                ((Cirkelpanel) cPanel).repaint();
+                geplaatst = true;
+
+            } catch (IllegalArgumentException d) {//zijde ipv straal
+                ErrorLabel.setText(d + "");
+
+            } catch (Exception e) {
+                ErrorLabel.setText(e + "");
+
+            }
 
         }
+
     }//GEN-LAST:event_knopVierkantActionPerformed
 
     /**
@@ -322,88 +363,150 @@ public class Cirkelgui extends javax.swing.JFrame {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            if (YcoordTextField.getText() == null && XcoordTextField.getText() == null) {
-                if (f != null && f instanceof Cirkel) {
-                    g.setColor(f.getKleurRand().vertaalKleur());//CIRKEL
-
-                    if (f.getDikteRand() != 0) {
+            if (YcoordTextField.getText().trim().equals("") && XcoordTextField.getText().trim().equals("")) {//BIJ GEEN INPUT
+                if (f != null && f instanceof Cirkel) {//CIRKEL
+                    g.setColor(f.getKleurRand().vertaalKleur());
+                    if (!geplaatst) {
                         g.fillOval(
                                 f.getMiddelpunt().getX() - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
                                 f.getMiddelpunt().getY() - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
                                 Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
                                 Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
                         );
-                    }
-
-                    g.setColor(f.getKleur().vertaalKleur());
-                    g.fillOval(
-                            f.getMiddelpunt().getX() + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            f.getMiddelpunt().getY() + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            Integer.parseInt(straalTextField.getText()),
-                            Integer.parseInt(straalTextField.getText())
-                    );
-                }
-                if (f != null && f instanceof Vierkant) {//VIERKANT                
-                    g.setColor(f.getKleurRand().vertaalKleur());
-                    if (f.getDikteRand() != 0) {
-                        g.fillRect(
-                                (cPanel.getWidth() / 2) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                                (cPanel.getHeight() / 2) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
-                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
+                        g.setColor(f.getKleur().vertaalKleur());
+                        g.fillOval(
+                                f.getMiddelpunt().getX() + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
+                                f.getMiddelpunt().getY() + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+                    } else if (geplaatst && f2 instanceof Cirkel) {
+                        g.setColor(f2.getKleurRand().vertaalKleur());
+                        g.fillOval(
+                                f2.getMiddelpunt().getX() - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                f2.getMiddelpunt().getY() - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()
+                        );
+                        g.setColor(f2.getKleur().vertaalKleur());
+                        g.fillOval(
+                                f2.getMiddelpunt().getX() + f2.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                f2.getMiddelpunt().getY() + f2.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
                         );
 
                     }
 
-                    g.setColor(f.getKleur().vertaalKleur());
-                    g.fillOval(
-                            (cPanel.getWidth() / 2) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            (cPanel.getHeight() / 2) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            Integer.parseInt(straalTextField.getText()),
-                            Integer.parseInt(straalTextField.getText())
-                    );
+                }
+                if (f != null && f instanceof Vierkant) {//VIERKANT                
+                    g.setColor(f.getKleurRand().vertaalKleur());
+                    if (!geplaatst) {
+                        g.fillRect(
+                                (cPanel.getWidth() / 2) - (Integer.parseInt(straalTextField.getText()) + (f.getDikteRand())) / 2,
+                                (cPanel.getHeight() / 2) - (Integer.parseInt(straalTextField.getText()) + (f.getDikteRand())) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
+                        );
+                        g.setColor(f.getKleur().vertaalKleur());
+                        g.fillRect(
+                                (cPanel.getWidth() / 2) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                (cPanel.getHeight() / 2) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+
+                    } else if (geplaatst && f2 instanceof Vierkant) {
+                        g.setColor(f2.getKleurRand().vertaalKleur());
+                        g.fillRect(
+                                (cPanel.getWidth() / 2) - (Integer.parseInt(straalTextField.getText()) + (f2.getDikteRand())) / 2,
+                                (cPanel.getHeight() / 2) - (Integer.parseInt(straalTextField.getText()) + (f2.getDikteRand())) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()
+                        );
+                        g.setColor(f2.getKleur().vertaalKleur());
+                        g.fillRect(
+                                (cPanel.getWidth() / 2) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                (cPanel.getHeight() / 2) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+
+                    }
+
                 }
 
-            }else if (YcoordTextField.getText() != null && XcoordTextField.getText() != null) {//als er wel coordinaten gegeven zijn
+            } else if (!YcoordTextField.getText().trim().equals("") && !XcoordTextField.getText().trim().equals("")) //BIJ WEL INPUT
+            {//als er wel coordinaten gegeven zijn
                 if (f != null && f instanceof Cirkel) {
                     g.setColor(f.getKleurRand().vertaalKleur());//CIRKEL
 
-                    if (f.getDikteRand() != 0) {
+                    if (!geplaatst) {
                         g.fillOval(
                                 Integer.parseInt(XcoordTextField.getText()) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
                                 Integer.parseInt(YcoordTextField.getText()) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
                                 Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
                                 Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
                         );
-                    }
-
-                    g.setColor(f.getKleur().vertaalKleur());
-                    g.fillOval(
-                            Integer.parseInt(XcoordTextField.getText()) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            Integer.parseInt(YcoordTextField.getText()) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            Integer.parseInt(straalTextField.getText()),
-                            Integer.parseInt(straalTextField.getText())
-                    );
-                }
-                if (f != null && f instanceof Vierkant) {//VIERKANT                
-                    g.setColor(f.getKleurRand().vertaalKleur());
-                    if (f.getDikteRand() != 0) {
-                        g.fillRect(
+                        g.setColor(f.getKleur().vertaalKleur());
+                        g.fillOval(
+                                (Integer.parseInt(XcoordTextField.getText())) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
                                 (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
-                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+                    } else if (geplaatst && f2 instanceof Cirkel){
+                        g.fillOval(
+                                Integer.parseInt(XcoordTextField.getText()) - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                Integer.parseInt(YcoordTextField.getText()) - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()
+                        );
+                        g.setColor(f2.getKleur().vertaalKleur());
+                        g.fillOval(
+                                (Integer.parseInt(XcoordTextField.getText())) + f2.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
                         );
 
                     }
 
-                    g.setColor(f.getKleur().vertaalKleur());
-                    g.fillOval(
-                            (Integer.parseInt(XcoordTextField.getText())) + f.getDikteRand() / 2 - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + f.getDikteRand()) / 2,
-                            Integer.parseInt(straalTextField.getText()),
-                            Integer.parseInt(straalTextField.getText())
-                    );
+                }
+                if (f != null && f instanceof Vierkant) {//VIERKANT                
+                    g.setColor(f.getKleurRand().vertaalKleur());
+                    if (!geplaatst) {
+                        g.fillRect(
+                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + (f.getDikteRand())) / 2,
+                                (Integer.parseInt(YcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + (f.getDikteRand())) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f.getDikteRand()
+                        );
+                        g.setColor(f.getKleur().vertaalKleur());
+                        g.fillRect(
+                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                (Integer.parseInt(YcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+
+                    } else if (geplaatst && f2 instanceof Vierkant) {
+                        g.fillRect(
+                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + (f2.getDikteRand())) / 2,
+                                (Integer.parseInt(YcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText()) + (f2.getDikteRand())) / 2,
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand(),
+                                Integer.parseInt(straalTextField.getText()) + f2.getDikteRand()
+                        );
+                        g.setColor(f2.getKleur().vertaalKleur());
+                        g.fillRect(
+                                (Integer.parseInt(XcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                (Integer.parseInt(YcoordTextField.getText())) - (Integer.parseInt(straalTextField.getText())) / 2,
+                                Integer.parseInt(straalTextField.getText()),
+                                Integer.parseInt(straalTextField.getText())
+                        );
+
+                    }
+
                 }
             }
 
