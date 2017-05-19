@@ -1,0 +1,67 @@
+#Fase1 --- gemeenschappelijk ---;;;;;
+JPW275;Computer Architecture;Fase1;ELOICT;Sem1;4
+JPW276;Microcontrollers;Fase1;ELOICT;Sem2;5
+JPW293;Introduction to Data networks;Fase1;ELOICT;Sem2;4
+JPW279;Digitale technieken;Fase1;ELOICT;Sem2;6
+JPW278;Elektronische netwerken;Fase1;ELOICT;Sem1;8
+JPW107;Relational Databases;Fase1;ELOICT;Sem2;4
+JPW104;Java Fundamentals;Fase1;ELOICT;Sem1;5
+JPW274;Java OO Programming;Fase1;ELOICT;Sem2;6
+JPW277;System Administration;Fase1;ELOICT;Sem1;4
+JPW273;Wiskundige technieken;Fase1;ELOICT;Sem1;5
+#Fase1 --- ICT only ---;;;;;
+JPW0FY;Web Design & Usability;Fase1;ICT;Sem1;4
+JPW106;Web Technology;Fase1;ICT;Sem2;5
+#Fase1 --- ELO only ---;;;;;
+OI3002;Elektronische uitvoeringstechniek;Fase1;ELO;Sem1;4
+OI3003;Toegepaste Elektronica;Fase1;ELO;Sem2;5
+#-------------------------      ;;;;;
+#Fase2 --- gemeenschappelijk ---   ;;;;;
+JPW0CM;Communicatieve vorming 1;Fase2;ELOICT;Sem2;4
+JPW333;Filosofie-Ethiek-RZL;Fase2;ELOICT;Sem1;3
+JPW334;Internet Of Things 1;Fase2;ELOICT;Sem1;5
+JPW335;Operationele versterkers;Fase2;ELOICT;Sem1;4
+JPW336;Routing and switching essentials;Fase2;ELOICT;Sem1;5
+JPW337;C# OO programming;Fase2;ELOICT;Sem1;5
+JPW338;Project 1;Fase2;ELOICT;Sem2;5
+#Fase2 --- ICT only ---;;;;;
+JPW339;Server Administration;Fase2;ICT;Sem2;5
+JPW340;User Experience Design;Fase2;ICT;Sem1;4
+JPW212;C# Programming techniques;Fase2;ICT;Sem2;7
+JPW359;Web scripting;Fase2;ICT;Sem1;5
+#Fase2 --- ICT_NET only ---;;;;;
+OI3004;Network security;Fase2;ICT_NET;Sem2;3
+OI3005;Scaling Networks;Fase2;ICT_NET;Sem2;5
+#Fase2 --- ICT_WEB only ---       ;;;;;
+JPW361;Web development;Fase2;ICT_WEB;Sem2;8
+#Fase2 - ELO only;;;;;
+JPW363;Filters en oscillatoren;Fase2;ELO;Sem2;3
+JPW364;OPAMP-toepassingen;Fase2;ELO;Sem2;3
+JPW365;Elektronische Uitvoeringstechniek 1;Fase2;ELO;Sem2;4
+JPW366;Signaalverwerking;Fase2;ELO;Sem2;4
+JPW367;Wetenschappen voor Elektronica;Fase2;ELO;Sem1;4
+JPW368;Telecommunicatie;Fase2;ELO;Sem2;5
+JPW369;Digitaal Systeemontwerp;Fase2;ELO;Sem2;6
+#-------------------------      ;;;;;
+#Fase3 --- gemeenschappelijk ---;;;;;
+JPW0DS;Communicatieve vorming 2;Fase3;ELOICT;Sem1;4
+JPW0G7;Beroepsethiek;Fase3;ELOICT;Sem1;3
+OI3008;Project 2;Fase3;ELOICT;Sem1;5
+OI3006;Ondernemen;Fase3;ELOICT;Sem1;3
+OI3013;Stagemobiliteit in Vlaanderen;Fase3;ELOICT;Sem2;15
+OI3012;Bachelorproef;Fase3;ELOICT;Sem2;8
+#Fase3 --- ICT only ---;;;;;
+OI3007;Advanced programming topics;Fase3;ICT;Sem1;5
+OI3009;Data security;Fase3;ICT;Sem1;4
+#Fase3 --- ICT_NET only ---;;;;;
+OI3010;Enterprise networks;Fase3;ICT_NET;Sem1;6
+OI3014;Cloud infrastructure;Fase3;ICT_NET;Sem2;7
+#Fase3 --- ICT_WEB only ---;;;;;
+OI3011;.NET web solutions;Fase3;ICT_WEB;Sem1;6
+JPW218;Web and Mobile Development;Fase3;ICT_WEB;Sem2;7
+#Fase3 --- ELO only ---;;;;;
+OI3019;Geavanceerd printontwerp;Fase3;ELO;Sem1;4
+OI3020;Hoogfrequenttechniek;Fase3;ELO;Sem1;4
+OI3021;Vermogenelektronica;Fase3;ELO;Sem1;7
+OI3024;Internet of Things 3;Fase3;ELO;Sem2;3
+JPW0GT;Videotechniek;Fase3;ELO;Sem2;4
