@@ -14,33 +14,42 @@ import java.util.ArrayList;
  *
  * @author Sebastiaan De Baedts
  */
-public class Curriculum{
+public class Curriculum {
 
-    private ArrayList<Vak> vakkenlijst = new ArrayList();
-    
+    private ArrayList<Vak> vakkenlijst;
+
     public void setCurriculum(ArrayList<Vak> vakkenlijst) {
-        this.vakkenlijst = vakkenlijst;
+        if (vakkenlijst != null) {
+            this.vakkenlijst = vakkenlijst;
+        } else {
+            throw new IllegalArgumentException("setCurriculum: vakkenlijst om te setten is null");
+        }
+
     }
-    public void voegVakkenToe(ArrayList<Vak> lijst){
-        this.vakkenlijst.addAll(lijst);
-        
+
+    public void voegVakkenToe(ArrayList<Vak> lijst) {
+        if (lijst != null) {
+            this.vakkenlijst.addAll(lijst);
+        } else {
+            throw new IllegalArgumentException("lijst van toe te voegen vakken is null in klasse curriculum");
+        }
+
     }
 
     public Curriculum() {
-
-       
+        vakkenlijst = new ArrayList();
         String file = "curriculum.csv";
-        String currentLine = "";        
+        String currentLine = "";
         BufferedReader br = null;
 
         try {
             br = new BufferedReader(new FileReader(file));
 
             // enkel gevulde lijnen
-            while ((currentLine = br.readLine()) != null) {//als currentline en de gelezen lijn niet null zijn
-                if (!(currentLine.contains("#"))) {//niet als er # staat
+            while ((currentLine = br.readLine()) != null) {//als currentline en de gelezen lijn niet null zijn               
                     String[] vakInfo = currentLine.split(";");
-                    this.vakkenlijst.add(
+                     if (vakInfo.length == 6) {
+                        this.vakkenlijst.add(                    
                             new Vak(
                                     vakInfo[0],
                                     vakInfo[1],
@@ -49,17 +58,14 @@ public class Curriculum{
                                     vakInfo[4],
                                     Integer.parseInt(vakInfo[5])
                             )
-                    );
-                }
+                    ); 
+                    }            
+                
             }
-        } 
-        
-        // Catch any exceptions that may occur
+        } // Catch any exceptions that may occur
         catch (Exception e) {
             System.err.print(e.getMessage());
-        } 
-        
-        // Close the BufferedReader (only if not null)
+        } // Close the BufferedReader (only if not null)
         finally {
             if (br != null) {
                 try {
@@ -75,19 +81,28 @@ public class Curriculum{
     public ArrayList<Vak> getVakkenlijst() {
         return vakkenlijst;
     }
-    public ArrayList<Vak> toonVakkenELOICT(ArrayList<Vak> vakken) {       
+
+    public ArrayList<Vak> toonVakkenELOICT(ArrayList<Vak> vakken) {
+        if (vakken == null) {
+            throw new IllegalArgumentException("vakkenlijst om ELOICT vakken uit te tonen is null");
+
+        }
         ArrayList<Vak> selectie = new ArrayList();
-        for (Vak vak : this.getVakkenlijst()) {//Vak vak : curriculum.getVakkenlijst()
+        for (Vak vak : this.getVakkenlijst()) {
             if (vak.getStgrp() == Studiegroep.ELOICT) {
                 selectie.add(vak);
             }
         }
 
         return selectie;
-    }
-    
-    public ArrayList<Vak> toonVakkenElo(ArrayList<Vak> vakken) {//alle vakken van ELO
 
+    }
+
+    public ArrayList<Vak> toonVakkenElo(ArrayList<Vak> vakken) {//alle vakken van ELO
+        if (vakken == null) {
+            throw new IllegalArgumentException("vakkenlijst om ELO vakken uit te tonen is null");
+
+        }
         ArrayList<Vak> selectie = new ArrayList();
         for (Vak vak : this.getVakkenlijst()) {//Vak vak : curriculum.getVakkenlijst()
             if (vak.getStgrp() == Studiegroep.ELO || vak.getStgrp() == Studiegroep.ELOICT) {
@@ -98,13 +113,15 @@ public class Curriculum{
         return selectie;
     }
 
-    
     public ArrayList<Vak> toonVakkenIct(ArrayList<Vak> vakken) {//alle vakken van ICT
+        if (vakken == null) {
+            throw new IllegalArgumentException("vakkenlijst om ICT vakken uit te tonen is null");
 
+        }
         ArrayList<Vak> selectie = new ArrayList();
 
         for (Vak vak : this.getVakkenlijst()) {
-            if (vak.getStgrp() == Studiegroep.ICT || vak.getStgrp() == Studiegroep.ELOICT ) {
+            if (vak.getStgrp() == Studiegroep.ICT || vak.getStgrp() == Studiegroep.ELOICT) {
                 selectie.add(vak);
             }
         }
@@ -112,8 +129,11 @@ public class Curriculum{
         return selectie;
     }
 
-    
     public ArrayList<Vak> toonVakkenInfrastructuur(ArrayList<Vak> vakken) {
+        if (vakken == null) {
+            throw new IllegalArgumentException("vakkenlijst om ICT_NET vakken uit te tonen is null");
+
+        }
 
         ArrayList<Vak> selectie = new ArrayList();
 
@@ -125,10 +145,13 @@ public class Curriculum{
 
         return selectie;
     }
-
     
+
     public ArrayList<Vak> toonVakkenWeb(ArrayList<Vak> vakken) {
-        
+        if (vakken == null) {
+            throw new IllegalArgumentException("vakkenlijst om ICT_WEB vakken uit te tonen is null");
+
+        }
         ArrayList<Vak> selectie = new ArrayList();
 
         for (Vak vak : this.getVakkenlijst()) {
@@ -140,5 +163,4 @@ public class Curriculum{
         return selectie;
     }
 
-    
 }

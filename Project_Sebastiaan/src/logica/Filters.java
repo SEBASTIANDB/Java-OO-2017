@@ -15,11 +15,7 @@ public interface Filters {
     public ArrayList<Vak> filterSemester(ArrayList<Vak> lijst, String semesters);
     public ArrayList<Vak> filterFase(ArrayList<Vak> lijst, String fase);
     public void pasFaseToe();
-//    public ArrayList<Vak> toonVakkenElo(ArrayList<Vak> vakken);
-//    public ArrayList<Vak> toonVakkenIct(ArrayList<Vak> vakken);
-//    public ArrayList<Vak> toonVakkenInfrastructuur(ArrayList<Vak> vakken);
-//    public ArrayList<Vak> toonVakkenWeb(ArrayList<Vak> vakken);
-//    public ArrayList<Vak> toonVakkenELOICT(ArrayList<Vak> vakken);
+
     
    
     

@@ -19,6 +19,9 @@ public class Vak implements Comparable<Vak> {
     private int stdp;
 
     public Vak(String opocode, String naam, String fase, Studiegroep groep, String semester, int studiepunten) {
+        if (opocode == null || naam == null || fase == null || groep == null || semester == null || studiepunten <= 0) {
+            throw new IllegalArgumentException("fout bij aanmaken van het vak");
+        }
         this.code = opocode;
         this.naam = naam;
         this.stgrp = groep;
@@ -27,6 +30,13 @@ public class Vak implements Comparable<Vak> {
         this.stdp = studiepunten;
     }
 
+    public void setFase(String fase) {
+        if (fase == null) {
+            throw new IllegalArgumentException("setFase: fase is null");
+        }
+        this.fase = fase;
+    }
+    
     public String getCode() {
         return code;
     }
@@ -58,6 +68,10 @@ public class Vak implements Comparable<Vak> {
 
     @Override
     public int compareTo(Vak v) {
+        if (v == null) {
+            throw new IllegalArgumentException("compareTo : vak is null");
+            
+        }
         if(this.fase.equals(v.fase)) {
             if (this.semester.equals(v.getSemester())) {
                 if (this.stgrp.equals(v.getStgrp())) {

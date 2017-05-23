@@ -13,7 +13,6 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import logica.*;
 
-
 /**
  *
  * @author Sebastiaan.debaedts
@@ -24,19 +23,16 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
     Curriculum curriculum = new Curriculum();
     ArrayList<Vak> displayNaFilter;//de arraylist die ik gebruik om na filteren te displayen op de textarea.
     ArrayList<Vak> displayNaFilterFase;// de arraylist die ik gebruik na de filtering van 
-//    ArrayList<Vak> EloICT;
-    Analyse analyse;
-    
-    
+
+    Analyse analyse = new Analyse();
+
     public Overzicht() {
         initComponents();
         curriculum.toonVakkenElo(curriculum.getVakkenlijst());
-        ButtonGroup bg = new ButtonGroup();   
+        ButtonGroup bg = new ButtonGroup();
 
     }
-    
-    
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,6 +59,7 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
         jLabelAnalyse = new javax.swing.JLabel();
         errorLabel = new javax.swing.JLabel();
         BeheerVensterBtn = new javax.swing.JButton();
+        AnalyseBTN = new javax.swing.JButton();
         jErrorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -160,6 +157,14 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
         });
         overzichtJPanel1.add(BeheerVensterBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 430, -1, -1));
 
+        AnalyseBTN.setText("analyse");
+        AnalyseBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalyseBTNActionPerformed(evt);
+            }
+        });
+        overzichtJPanel1.add(AnalyseBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 400, 100, -1));
+
         jErrorLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,36 +192,36 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void semester2CheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semester2CheckboxActionPerformed
-        try{
-            if (!((String)keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String)keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
-               keuzeComboBoxActionPerformed(evt);
-           }else{
-              keuzeAfstudeerActionPerformed(evt); 
-           }
-       }catch(Exception e){
-          jErrorLabel.setText(e+"");
-       }
-      
+        try {
+            if (!((String) keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
+                keuzeComboBoxActionPerformed(evt);
+            } else {
+                keuzeAfstudeerActionPerformed(evt);
+            }
+        } catch (Exception e) {
+            jErrorLabel.setText(e + "");
+        }
+
     }//GEN-LAST:event_semester2CheckboxActionPerformed
 
     private void semester1CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semester1CheckBoxActionPerformed
-       try{
-           if (!((String)keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String)keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
-               keuzeComboBoxActionPerformed(evt);
-           }else{
-              keuzeAfstudeerActionPerformed(evt); 
-           }
-           
-       }catch(Exception e){
-           jErrorLabel.setText(e+"");
-       }
-     
+        try {
+            if (!((String) keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
+                keuzeComboBoxActionPerformed(evt);
+            } else {
+                keuzeAfstudeerActionPerformed(evt);
+            }
+
+        } catch (Exception e) {
+            jErrorLabel.setText(e + "");
+        }
+
     }//GEN-LAST:event_semester1CheckBoxActionPerformed
 
     private void keuzeAfstudeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keuzeAfstudeerActionPerformed
-        
+
         Analyse analyse = new Analyse();
         displayNaFilter = new ArrayList();
         displayNaFilterFase = new ArrayList();
@@ -226,13 +231,13 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
             case "ICT_WEB":
                 if (semester1CheckBox.isSelected()) {
                     overzichtTextArea.setText("");
-                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenWeb(curriculum.getVakkenlijst()), "Sem1"));                   
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenWeb(curriculum.getVakkenlijst()), "Sem1"));
                     analyse.setStudiegroepen(Studiegroep.ICT_WEB);
                     analyse.setSemesters("Sem1");
                 }
                 if (semester2Checkbox.isSelected()) {
                     overzichtTextArea.setText("");
-                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenWeb(curriculum.getVakkenlijst()), "Sem2"));                     
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenWeb(curriculum.getVakkenlijst()), "Sem2"));
                     analyse.setStudiegroepen(Studiegroep.ICT_WEB);
                     analyse.setSemesters("Sem2");
                 }
@@ -241,52 +246,48 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
             case "ICT_NET":
                 if (semester1CheckBox.isSelected()) {
                     overzichtTextArea.setText("");
-                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenInfrastructuur(curriculum.getVakkenlijst()), "Sem1"));      
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenInfrastructuur(curriculum.getVakkenlijst()), "Sem1"));
                     analyse.setStudiegroepen(Studiegroep.ICT_NET);
                     analyse.setSemesters("Sem1");
                 }
                 if (semester2Checkbox.isSelected()) {
                     overzichtTextArea.setText("");
-                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenInfrastructuur(curriculum.getVakkenlijst()), "Sem2"));                
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenInfrastructuur(curriculum.getVakkenlijst()), "Sem2"));
                     analyse.setStudiegroepen(Studiegroep.ICT_NET);
                     analyse.setSemesters("Sem2");
                 }
-                break;                        
+                break;
 
         }
         if (((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting") && keuzeComboBox.getSelectedItem().equals("Onbepaald")) {
-                    if (semester1CheckBox.isSelected()) {
-                    overzichtTextArea.setText("");
-                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem1"));
-                    analyse.setStudiegroepen(Studiegroep.ELOICT);
-                    analyse.setSemesters("Sem1");
-                    
-                    }if (semester2Checkbox.isSelected()) {
-                        overzichtTextArea.setText("");
-                        displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem2"));
-                        analyse.setStudiegroepen(Studiegroep.ELOICT);
-                        analyse.setSemesters("Sem2");
+            if (semester1CheckBox.isSelected()) {
+                overzichtTextArea.setText("");
+                displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem1"));
+                analyse.setStudiegroepen(Studiegroep.ELOICT);
+                analyse.setSemesters("Sem1");
 
-                    }
+            }
+            if (semester2Checkbox.isSelected()) {
+                overzichtTextArea.setText("");
+                displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem2"));
+                analyse.setStudiegroepen(Studiegroep.ELOICT);
+                analyse.setSemesters("Sem2");
+
+            }
         }
-        
+
         pasFaseToe();//maakt toch nieuwe aan en append die(leeg)
         Collections.sort(displayNaFilterFase);
         for (Vak v : displayNaFilterFase) {
             overzichtTextArea.append(v.toString());
         }
         analyse.setVakkenLijst(displayNaFilterFase);
-        for (String s : analyse.maakAnalyseAantal()) {
-            analyseTextArea.append(s);        
-            
-        }
-        
-        
+
 
     }//GEN-LAST:event_keuzeAfstudeerActionPerformed
 
     private void keuzeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keuzeComboBoxActionPerformed
-       
+
         Analyse analyse = new Analyse();
         displayNaFilter = new ArrayList();
         displayNaFilterFase = new ArrayList();
@@ -300,7 +301,7 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
                     displayNaFilter.addAll(filterSemester(curriculum.toonVakkenElo(curriculum.getVakkenlijst()), "Sem2"));
                     analyse.setStudiegroepen(Studiegroep.ELO);
                     analyse.setSemesters("Sem2");
-                    
+
                 }
                 if (semester1CheckBox.isSelected()) {
                     overzichtTextArea.setText("");
@@ -325,17 +326,19 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
                     analyse.setSemesters("Sem1");
                 }
                 break;
-            default : 
+            default:
                 if (semester2Checkbox.isSelected()) {
-                   overzichtTextArea.setText(""); 
-                   displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem2"));
-                   analyse.setStudiegroepen(Studiegroep.ELOICT);
-                   analyse.setSemesters("Sem2");
-                }if (semester1CheckBox.isSelected()) {
-                   overzichtTextArea.setText(""); 
-                   displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem1"));
-                   analyse.setStudiegroepen(Studiegroep.ELOICT);
-                   analyse.setSemesters("Sem1");
+                    overzichtTextArea.setText("");
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem2"));
+                    analyse.setStudiegroepen(Studiegroep.ELOICT);
+                    analyse.setSemesters("Sem2");
+                }
+                if (semester1CheckBox.isSelected()) {
+                    overzichtTextArea.setText("");
+                    displayNaFilter.addAll(filterSemester(curriculum.toonVakkenELOICT(curriculum.getVakkenlijst()), "Sem1"));
+                    analyse.setStudiegroepen(Studiegroep.ELOICT);
+                    analyse.setSemesters("Sem1");
+
                 }
                 break;
 
@@ -346,57 +349,73 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
             overzichtTextArea.append(v.toString());
         }
         analyse.setVakkenLijst(displayNaFilterFase);
-        for (String s : analyse.maakAnalyseAantal()) {
-            analyseTextArea.append(s);
-           
-            
-        }
-        
+
+
     }//GEN-LAST:event_keuzeComboBoxActionPerformed
 
     private void fase2CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fase2CheckBoxActionPerformed
-        try{
-            if (!((String)keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String)keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
-               keuzeComboBoxActionPerformed(evt);
-           }else{
-              keuzeAfstudeerActionPerformed(evt); 
-           }
-       }catch(Exception e){
-           jErrorLabel.setText(e+"");
-       }
-       
+        try {
+            if (!((String) keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
+                keuzeComboBoxActionPerformed(evt);
+            } else {
+                keuzeAfstudeerActionPerformed(evt);
+            }
+        } catch (Exception e) {
+            jErrorLabel.setText(e + "");
+        }
+
     }//GEN-LAST:event_fase2CheckBoxActionPerformed
 
     private void fase1CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fase1CheckBoxActionPerformed
-         try{
-            if (!((String)keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String)keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
-               keuzeComboBoxActionPerformed(evt);
-           }else{
-              keuzeAfstudeerActionPerformed(evt); 
-           }
-       }catch(Exception e){
-          jErrorLabel.setText(e+"");
-       }
-        
+        try {
+            if (!((String) keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
+                keuzeComboBoxActionPerformed(evt);
+            } else {
+                keuzeAfstudeerActionPerformed(evt);
+            }
+        } catch (Exception e) {
+            jErrorLabel.setText(e + "");
+        }
+
     }//GEN-LAST:event_fase1CheckBoxActionPerformed
 
     private void fase3CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fase3CheckBoxActionPerformed
-         try{
-            if (!((String)keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String)keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
-               keuzeComboBoxActionPerformed(evt);
-           }else{
-              keuzeAfstudeerActionPerformed(evt); 
-           }
-       }catch(Exception e){
-           jErrorLabel.setText(e+"");
-           
-       }
-        
+        try {
+            if (!((String) keuzeComboBox.getSelectedItem()).equals("Onbepaald") && ((String) keuzeAfstudeer.getSelectedItem()).equals("Afstudeerrichting")) {
+                keuzeComboBoxActionPerformed(evt);
+            } else {
+                keuzeAfstudeerActionPerformed(evt);
+            }
+        } catch (Exception e) {
+            jErrorLabel.setText(e + "");
+
+        }
+
     }//GEN-LAST:event_fase3CheckBoxActionPerformed
 
     private void BeheerVensterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeheerVensterBtnActionPerformed
-       
+        try {
+            new Beheervenster().setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            errorLabel.setText(e + "");
+        }
+
     }//GEN-LAST:event_BeheerVensterBtnActionPerformed
+
+    private void AnalyseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyseBTNActionPerformed
+        
+        String[][] appendix = new String[16][4];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 3; j++) {
+                appendix[i][j] = (analyse.printStudiepunten(displayNaFilterFase)[i][j]);//nullpointer??? (mss is niet elke setter gebruikt voor analyse)
+                analyseTextArea.append(appendix[i][j]);
+            }
+
+        }
+    }//GEN-LAST:event_AnalyseBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,6 +454,7 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnalyseBTN;
     private javax.swing.JButton BeheerVensterBtn;
     private javax.swing.JTextArea analyseTextArea;
     private javax.swing.JLabel errorLabel;
@@ -476,7 +496,6 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
         for (Vak vak : lijst) {
             if (vak.getFase().equals(fase)) {
                 nieuw.add(vak);
-                //als fase gelijk is, toevoegen
 
             }
 
@@ -490,20 +509,17 @@ public class Overzicht extends javax.swing.JFrame implements Filters {
     public void pasFaseToe() {//past de controle van de Fase checkboxes toe op de uiteindelijke selectie van vakken
         if (fase1CheckBox.isSelected()) {
             displayNaFilterFase.addAll(filterFase(displayNaFilter, "Fase1"));
-            
+
         }
         if (fase2CheckBox.isSelected()) {
             displayNaFilterFase.addAll(filterFase(displayNaFilter, "Fase2"));
-            
+
         }
         if (fase3CheckBox.isSelected()) {
             displayNaFilterFase.addAll(filterFase(displayNaFilter, "Fase3"));
-           
+
         }
 
     }
-
-    
-    
 
 }

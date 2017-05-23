@@ -25,9 +25,24 @@ public class Student{
     String currentLine = "";
 
     public Student(String naam, String voornaam, Curriculum curriculum) {
+        if (naam == null || voornaam == null || curriculum == null) {
+            throw new IllegalArgumentException("fout bij input constructor Student");
+            
+        }
         this.naam = naam;
         this.voornaam = voornaam;
         this.curriculum = curriculum;
+        read();
+        
+   
+
+    }
+    public Student(Curriculum c){
+        this.curriculum = c;
+        this.naam ="";
+        this.voornaam = "";
+    }
+    public void read(){
         BufferedWriter bw = null;
         FileWriter fw = null;
         try {
@@ -54,30 +69,40 @@ public class Student{
             }
 
         }
-
     }
     
 
-    public Curriculum getCurriculum() {
+    public Curriculum getCurriculum() {        
         return curriculum;
     }
 
     public void setVoornaam(String voornaam) {
-        this.voornaam = voornaam;
+        if (voornaam != null) {
+        this.voornaam = voornaam;    
+        }else{
+            throw new IllegalArgumentException("setVoornaam : String is null");
+        }
+        
     }
 
     public void setNaam(String naam) {
-        this.naam = naam;
+        if (naam != null) {
+        this.naam = naam;    
+        }else{
+        throw new IllegalArgumentException("setNaam: String is null");
+        }
+        
     }
 
     public void setCurriculum(Curriculum curriculum) {
-        this.curriculum = curriculum;
+        if (curriculum == null) {
+            throw new IllegalArgumentException("setCurriculum: curriculum is null");
+            
+        }else{
+           this.curriculum = curriculum;
+            read(); 
+        }
+        
+        
     }
-
-    
-
-    
-
-    
-
 }
